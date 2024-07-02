@@ -3,11 +3,13 @@ package com.trainingmug.foodiecliap.util;
 
 import com.trainingmug.foodiecliap.model.Customer;
 import com.trainingmug.foodiecliap.model.Dish;
+import com.trainingmug.foodiecliap.model.Restaurant;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CsvReader {
@@ -75,6 +77,38 @@ public class CsvReader {
         }
 
         return dishList;
+
+    }
+
+    public List<Restaurant> readRestaurantFromCsv(){
+        String restaurantCsvFilePath  = "C:\\Users\\ADMIN\\IdeaProjects\\foodie-cli-app-java\\data\\restaurants.csv";
+        List<Restaurant> restaurantsList = new ArrayList<>();
+        //java io classes (File Reader, BufferedReader)
+        //try-with-resource
+        String line;
+        try (BufferedReader br = new BufferedReader(new FileReader(restaurantCsvFilePath))) {
+            String csvSplitBy = ",";
+            br.readLine();
+            while((line = br.readLine()) != null){
+                //c001,john doe, john.doe@gmail.com, johndoe@1234
+                String[] data = line.split(csvSplitBy);
+                Restaurant restaurant = new Restaurant();
+                restaurant.setId(data[0]);
+                restaurant.setName(data[1]);
+                restaurant.setAddress(data[2]);
+                restaurant.setMenu(Collections.singletonList(data[3]));
+
+                restaurantsList.add(restaurant);
+            }
+
+
+        } catch(IOException e){
+            System.out.println("File not found in the path : "+ restaurantCsvFilePath );
+            System.exit(0);
+            e.printStackTrace();
+        }
+
+        return restaurantsList;
 
     }
 }
