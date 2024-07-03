@@ -4,6 +4,7 @@ import com.trainingmug.foodiecliap.model.Customer;
 import com.trainingmug.foodiecliap.util.CsvReader;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerRepository {
 
@@ -21,6 +22,10 @@ public class CustomerRepository {
     public Customer save(Customer customer){
         this.customersList.add(customer);
         return customer;
+    }
+
+    public Optional<Customer> findCustomerById(String id){
+        return this.customersList.stream().filter(customer -> customer.getId().equals(id)).findFirst();
     }
 
 
