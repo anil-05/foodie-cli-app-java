@@ -3,8 +3,10 @@ package com.trainingmug.foodiecliap.ui;
 import com.trainingmug.foodiecliap.controller.CustomerController;
 import com.trainingmug.foodiecliap.exception.CustomerExistsException;
 import com.trainingmug.foodiecliap.exception.CustomerNotFoundException;
+import com.trainingmug.foodiecliap.factory.Factory;
 import com.trainingmug.foodiecliap.model.Customer;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CustomerMenu extends Menu{
@@ -84,10 +86,10 @@ public class CustomerMenu extends Menu{
             System.out.println("Enter Password");
             String password = scanner.nextLine();
             Customer customer = new Customer();
-            customer.setId(id)
-                    .setName(name)
-                    .setEmail(email)
-                    .setPassword(password);
+            customer.setId(id);
+            customer.setName(name);
+            customer.setEmail(email);
+            customer.setPassword(password);
 
             Customer updatedCustomer = customerController.updateCustomer(customer);
             System.out.println("Customer Updated Successfully");
@@ -161,10 +163,10 @@ public class CustomerMenu extends Menu{
             String password = scanner.nextLine();
             // System.out.println("Id : " + id + " , Name : " + name + " , E-mail :  " + email + ", Password :" + password);
             Customer customer = new Customer();
-            customer.setId(id)
-                    .setName(name)
-                    .setEmail(email)
-                    .setPassword(password);
+            customer.setId(id);
+            customer.setName(name);
+            customer.setEmail(email);
+            customer.setPassword(password);
 
             Customer savedCustomer = customerController.save(customer);
             System.out.println("Customer Registration Successful");

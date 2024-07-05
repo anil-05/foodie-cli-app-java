@@ -3,6 +3,7 @@ package com.trainingmug.foodiecliap.service;
 import com.trainingmug.foodiecliap.exception.OrderExistsException;
 import com.trainingmug.foodiecliap.exception.OrderNotFoundException;
 import com.trainingmug.foodiecliap.model.Order;
+import com.trainingmug.foodiecliap.repository.OrderRepository;
 
 import java.util.List;
 import java.util.Optional;

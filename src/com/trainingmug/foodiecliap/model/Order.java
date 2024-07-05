@@ -1,6 +1,6 @@
 package com.trainingmug.foodiecliap.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,7 +31,7 @@ public class Order {
     private Restaurant restaurant;
     private List<Dish> dishes;
     private double price;
-    private Date orderDate;
+    private LocalDate orderDate;
 
     public Order() {
     }
@@ -76,11 +76,11 @@ public class Order {
         this.price = price;
     }
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -107,5 +107,13 @@ public class Order {
                 ", price=" + price +
                 ", orderDate=" + orderDate +
                 '}';
+    }
+
+    public void setDishList(List<Dish> dishList) {
+
+    }
+
+    public void setTotalPrice(double orderPrice) {
+
     }
 }

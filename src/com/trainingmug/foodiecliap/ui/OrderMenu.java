@@ -1,10 +1,26 @@
 package com.trainingmug.foodiecliap.ui;
 
+import com.trainingmug.foodiecliap.controller.OrderController;
+import com.trainingmug.foodiecliap.exception.DishNotFoundException;
+import com.trainingmug.foodiecliap.exception.OrderExistsException;
+import com.trainingmug.foodiecliap.exception.OrderNotFoundException;
+import com.trainingmug.foodiecliap.exception.RestaurantNotFoundException;
+import com.trainingmug.foodiecliap.factory.Factory;
+import com.trainingmug.foodiecliap.model.Customer;
+import com.trainingmug.foodiecliap.model.Dish;
+import com.trainingmug.foodiecliap.model.Order;
+import com.trainingmug.foodiecliap.model.Restaurant;
+import com.trainingmug.foodiecliap.service.DishServiceImpl;
+
+import java.time.LocalDate;
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class OrderMenu extends Menu{
 
     private final OrderController orderController;
 
-    public OrdersMenu() {
+    public OrderMenu() {
         this.orderController = Factory.getOrderController();
     }
 
@@ -103,7 +119,7 @@ public class OrderMenu extends Menu{
             String id = scanner.nextLine();
 
             while (restaurant == null) {
-                new RestaurantsMenu().displayRestaurants();
+                new RestaurantMenu().displayRestaurants();
                 printDashLine();
                 System.out.println("Choose the Restaurant Id (Ex: R08 )");
                 String restaurantId = scanner.nextLine();
@@ -111,11 +127,11 @@ public class OrderMenu extends Menu{
             }
             char addMoreItems = 'Y';
             while (addMoreItems == 'Y') {
-                new RestaurantsMenu().displayMenuItems(restaurant.getId());
+                new RestaurantMenu().displayMenuItems(restaurant.getId());
                 printDashLine();
                 System.out.println("Enter the Dish Id (Ex : D001 )");
                 String dishId = scanner.nextLine();
-                Dish selectedDish = dishService.getDishById(dishId);
+                Dish selectedDish = ((DishServiceImpl) dishService).getDishById(dishId);
                 dishList.add(selectedDish);
                 System.out.println("One Dish is added successfully : " + selectedDish.getName());
                 System.out.println("Do you want to add more dishes (Y/N)");
@@ -129,18 +145,18 @@ public class OrderMenu extends Menu{
 
 
             Order order = new Order();
-            order.setId(id)
-                    .setCustomer(loggedInCustomer)
-                    .setRestaurant(restaurant)
-                    .setDishList(dishList)
-                    .setTotalPrice(orderPrice)
-                    .setOrderDate(orderDate);
+            order.setId(id);
+            order.setCustomer(loggedInCustomer);
+            order.setRestaurant(restaurant);
+            order.setDishList(dishList);
+            order.setTotalPrice(orderPrice);
+            order.setOrderDate(orderDate);
 
             Order placedOrder = orderController.saveOrder(order);
             if(placedOrder != null)
                 System.out.println("Order Placed Successfully with the following details");
 
-            displayOrderDetails(placedOrder);
+            displayOrderDetails(Objects.requireNonNull(placedOrder));
 
         } catch (RestaurantNotFoundException | OrderExistsException e) {
             System.out.println(e.getMessage());

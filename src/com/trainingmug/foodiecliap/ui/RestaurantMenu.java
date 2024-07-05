@@ -1,10 +1,23 @@
 package com.trainingmug.foodiecliap.ui;
 
+import com.trainingmug.foodiecliap.controller.RestaurantController;
+import com.trainingmug.foodiecliap.exception.DishNotFoundException;
+import com.trainingmug.foodiecliap.exception.RestaurantExistsException;
+import com.trainingmug.foodiecliap.exception.RestaurantNotFoundException;
+import com.trainingmug.foodiecliap.factory.Factory;
+import com.trainingmug.foodiecliap.model.Dish;
+import com.trainingmug.foodiecliap.model.Restaurant;
+import com.trainingmug.foodiecliap.service.RestaurantService;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 public class RestaurantMenu extends Menu{
 
     private RestaurantController restaurantController;
 
-    public RestaurantsMenu() {
+    public RestaurantMenu() {
         this.restaurantController = Factory.getRestaurantController();
     }
 
@@ -74,9 +87,9 @@ public class RestaurantMenu extends Menu{
             System.out.println("Enter Menu Dish Items separated by : (D101:D102)");
             String menu = scanner.nextLine();
             Restaurant restaurant = new Restaurant();
-            restaurant.setName(name)
-                    .setAddress(address)
-                    .setMenu(Arrays.asList(menu.split(":")));
+            restaurant.setName(name);
+            restaurant.setAddress(address);
+            restaurant.setMenu(Arrays.asList(menu.split(":")));
 
             Restaurant updatedRestaurant = restaurantController.updateRestaurant(restaurant);
             System.out.println("Restaurant Updated Successfully");
@@ -117,10 +130,10 @@ public class RestaurantMenu extends Menu{
             System.out.println("Enter Dishes for Menu separated by : (D010:D009)");
             String menu = scanner.nextLine();
             Restaurant restaurant = new Restaurant();
-            restaurant.setId(id)
-                    .setName(name)
-                    .setAddress(address)
-                    .setMenu(Arrays.asList(menu.split(":")));
+            restaurant.setId(id);
+            restaurant.setName(name);
+            restaurant.setAddress(address);
+            restaurant.setMenu(List.of(menu.split(":")));
             Restaurant savedRestaurant = restaurantController.saveRestaurant(restaurant);
             displayRestaurant(savedRestaurant);
         } catch (RestaurantExistsException e) {

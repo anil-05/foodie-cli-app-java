@@ -2,6 +2,8 @@ package com.trainingmug.foodiecliap.ui;
 
 import com.trainingmug.foodiecliap.controller.DishController;
 import com.trainingmug.foodiecliap.exception.DishExistsException;
+import com.trainingmug.foodiecliap.exception.DishNotFoundException;
+import com.trainingmug.foodiecliap.factory.Factory;
 import com.trainingmug.foodiecliap.model.Dish;
 
 import java.util.List;
@@ -81,10 +83,10 @@ public class DishesMenu extends Menu{
             System.out.println("Enter Price");
             double price = scanner.nextDouble();
             Dish dish = new Dish();
-            dish.setId(id)
-                    .setName(name)
-                    .setDescription(description)
-                    .setPrice(price);
+            dish.setId(id);
+            dish.setName(name);
+            dish.setDescription(description);
+            dish.setPrice(price);
 
             Dish updatedDish = dishController.update(dish);
             System.out.println("Dish Updated Successfully");
@@ -125,10 +127,10 @@ public class DishesMenu extends Menu{
             System.out.println("Enter Price");
             double price = scanner.nextDouble();
             Dish dish = new Dish();
-            dish.setId(id)
-                    .setName(name)
-                    .setDescription(description)
-                    .setPrice(price);
+            dish.setId(id);
+            dish.setName(name);
+            dish.setDescription(description);
+            dish.setPrice(price);
 
             Dish savedDish = this.dishController.save(dish);
             displayDish(savedDish);

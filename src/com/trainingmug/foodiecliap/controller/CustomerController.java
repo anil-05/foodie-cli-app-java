@@ -15,4 +15,13 @@ public class CustomerController {
     public Customer save(Customer customer) throws CustomerExistsException {
         return this.customerService.save(customer);
     }
+
+    public void deleteCustomer(String id) {
+        this.customerService.deleteCustomer(id);
+
+    }
+
+    public Customer updateCustomer(Customer customer) {
+        return this.customerService.updateCustomer(customer);
+    }
 }

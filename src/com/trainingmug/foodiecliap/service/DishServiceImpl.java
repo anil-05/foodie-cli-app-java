@@ -18,7 +18,7 @@ public class DishServiceImpl implements DishService{
 
     @Override
     public List<Dish> getDishesList() {
-        return this.dishRepository.getDishList();
+        return this.dishRepository.getAllDishes();
     }
 
     @Override

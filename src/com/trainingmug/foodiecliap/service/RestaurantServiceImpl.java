@@ -3,10 +3,12 @@ package com.trainingmug.foodiecliap.service;
 import com.trainingmug.foodiecliap.exception.DishNotFoundException;
 import com.trainingmug.foodiecliap.exception.RestaurantExistsException;
 import com.trainingmug.foodiecliap.exception.RestaurantNotFoundException;
+import com.trainingmug.foodiecliap.factory.Factory;
 import com.trainingmug.foodiecliap.model.Dish;
 import com.trainingmug.foodiecliap.model.Restaurant;
 import com.trainingmug.foodiecliap.repository.RestaurantRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +22,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public List<Restaurant> getRestaurantList() {
-        return this.restaurantRepository.getRestaurantList();
+        return this.restaurantRepository.getAllRestaurants();
     }
 
     @Override
@@ -45,7 +47,7 @@ public class RestaurantServiceImpl implements RestaurantService{
         Optional<Restaurant> restaurantById = this.restaurantRepository.findRestaurantById(restaurant.getId());
         if(restaurantById.isEmpty())
             throw new RestaurantNotFoundException("Restaurant Not Found with this Id  :" + restaurant.getId());
-        return this.restaurantRepository.updateRetaurant(restaurant);
+        return this.restaurantRepository.updateRestaurant(restaurant);
     }
 
 
